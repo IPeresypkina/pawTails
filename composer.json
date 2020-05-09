@@ -39,12 +39,14 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "yii\\composer\\Installer::postInstall"
+            "yii\\composer\\Installer::postInstall",
+            "php artisan clear-compiled",
+            "chmod -R 777 public/"
         ],
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
             "yii\\composer\\Installer::postInstall"
-        ]
+        ],
     },
     "extra": {
         "yii\\composer\\Installer::postCreateProject": {
