@@ -1,0 +1,1 @@
+FROM mgcrea/node-opencv:3.3.0

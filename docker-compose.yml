@@ -1,0 +1,33 @@
+version: '2'
+services:
+  php:
+    image: yiisoftware/yii2-php:7.1-apache
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '50003:80'
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_DATABASE=pawTails
+      - MYSQL_USER=yii2basic
+      - MYSQL_PASSWORD=secret
+  backend:
+    image: mgcrea/node-opencv:3.3.0
+    container_name: test_opencv
+    command: "node lib"
+    # command: "/usr/local/bin/npm install --verbose"
+    working_dir: /srv/node
+    environment:
+      - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/opencv/build/lib
+      - NODE_ENV=production
+    expose:
+      - "3000"
+    volumes:
+      - .:/srv/node
+      - /usr/lib/beignet:/usr/lib/beignet:ro
+    devices:
+      - "/dev/video0:/dev/video0"
+      - "/dev/dri/card0:/dev/dri/card0"
