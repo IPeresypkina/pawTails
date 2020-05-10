@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=us-cdbr-east-06.cleardb.net;dbname=pawTails',
-    'username' => 'bebdb344fb81ea',
-    'password' => '48b00b14',
+    'dsn' => 'mysql:host=mysql;dbname=pawTails',
+    'username' => 'root',
+    'password' => 'verysecret',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

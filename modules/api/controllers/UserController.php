@@ -5,6 +5,7 @@ use app\models\forms\ResetForm;
 use app\models\LoginForm;
 use app\models\LoginupForm;
 use app\models\PasswordResetRequestForm;
+use app\models\ProfileUpdateForm;
 use app\models\ResetPasswordForm;
 use app\models\User;
 use Yii;
@@ -26,6 +27,7 @@ class UserController extends BaseController
             'loginup' => ['POST', 'OPTIONS'],
             'logout' => ['POST', 'OPTIONS'],
             'view' => ['GET', 'OPTIONS'],
+            'update' => ['PUT', 'OPTIONS'],
         ];
     }
 
@@ -65,13 +67,13 @@ class UserController extends BaseController
 
     /**
      * Logout action.
-     * @return array|Response
+     * @return string
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return 'success';
     }
 
     /**
@@ -133,12 +135,20 @@ class UserController extends BaseController
 
     /**
      * Обновление данных пользователя по id
+     *
      * @param $id
-     * @return User|null
+     * @return ProfileUpdateForm
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
         $user = User::findOne($id);
-        return $user;
+        $model = new ProfileUpdateForm($user);
+
+        if ($model->load(Yii::$app->request->getBodyParams(), '') && $model->update()) {
+            return $model;
+        } else {
+            return $model;
+        }
     }
 }

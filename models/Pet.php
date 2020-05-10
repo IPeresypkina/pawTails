@@ -15,6 +15,7 @@ use Yii;
  * @property string $breed Порода
  * @property int $photoId FK Фотографий
  * @property string|null $specialSigns Особые приметы
+ * @property string $status Статус (найден/потерян/none)
  * @property string $createdAt Дата создания
  * @property string|null $updatedAt Дата изменения
  *
@@ -42,6 +43,7 @@ class Pet extends BaseModel
             [['species', 'gender', 'specialSigns'], 'string'],
             [['createdAt', 'updatedAt'], 'safe'],
             [['name', 'breed'], 'string', 'max' => 128],
+            [['status'], 'string', 'max' => 255],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
             [['photoId'], 'exist', 'skipOnError' => true, 'targetClass' => PetPhoto::className(), 'targetAttribute' => ['photoId' => 'id']],
         ];
@@ -61,6 +63,7 @@ class Pet extends BaseModel
             'breed' => 'Порода',
             'photoId' => 'FK Фотографий',
             'specialSigns' => 'Особые приметы',
+            'status' => 'Статус (найден/потерян/none)',
             'createdAt' => 'Дата создания',
             'updatedAt' => 'Дата изменения',
         ];

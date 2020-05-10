@@ -24,7 +24,6 @@ class SignupForm extends Model
         return [
             ['firstName', 'trim'],
             ['firstName', 'required'],
-            ['firstName', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
             ['firstName', 'string', 'min' => 2, 'max' => 255],
             ['email', 'trim'],
             ['email', 'required'],
@@ -46,6 +45,7 @@ class SignupForm extends Model
      */
     public function signup()
     {
+        var_dump($this->firstName); die;
         $user = new User();
         $user->firstName = $this->firstName;
         $user->email = $this->email;
