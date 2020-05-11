@@ -20,7 +20,7 @@ services:
 #    command: "node lib"
 #    # command: "/usr/local/bin/npm install --verbose"
 #    working_dir: /srv/node
-#    environment:
+#    environments:
 #      - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/opencv/build/lib
 #      - NODE_ENV=production
 #    expose:
