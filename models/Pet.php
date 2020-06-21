@@ -9,10 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property int $userId FK Пользователя
+ * @property int $breedId FK Породы
  * @property string $species Вид
  * @property string|null $name Кличка
  * @property string|null $gender м/ж
- * @property string $breed Порода
  * @property int $photoId FK Фотографий
  * @property string|null $specialSigns Особые приметы
  * @property string $status Статус (найден/потерян/none)
@@ -21,9 +21,15 @@ use Yii;
  *
  * @property User $user
  * @property PetPhoto $photo
+ * @property Breed $breed
  */
-class Pet extends BaseModel
+class Pet extends \yii\db\ActiveRecord
 {
+
+    const STATUS_FIND = 'find';
+    const STATUS_LOST = 'lost';
+    const STATUS_NONE = 'none';
+
     /**
      * {@inheritdoc}
      */
@@ -38,14 +44,15 @@ class Pet extends BaseModel
     public function rules()
     {
         return [
-            [['userId', 'breed', 'photoId', 'createdAt'], 'required'],
-            [['userId', 'photoId'], 'integer'],
+            [['userId', 'breedId', 'photoId', 'status', 'createdAt'], 'required'],
+            [['userId', 'breedId', 'photoId'], 'integer'],
             [['species', 'gender', 'specialSigns'], 'string'],
             [['createdAt', 'updatedAt'], 'safe'],
-            [['name', 'breed'], 'string', 'max' => 128],
+            [['name'], 'string', 'max' => 128],
             [['status'], 'string', 'max' => 255],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
             [['photoId'], 'exist', 'skipOnError' => true, 'targetClass' => PetPhoto::className(), 'targetAttribute' => ['photoId' => 'id']],
+            [['breedId'], 'exist', 'skipOnError' => true, 'targetClass' => Breed::className(), 'targetAttribute' => ['breedId' => 'id']],
         ];
     }
 
@@ -56,16 +63,16 @@ class Pet extends BaseModel
     {
         return [
             'id' => 'ID',
-            'userId' => 'FK Пользователя',
-            'species' => 'Вид',
-            'name' => 'Кличка',
-            'gender' => 'м/ж',
-            'breed' => 'Порода',
-            'photoId' => 'FK Фотографий',
-            'specialSigns' => 'Особые приметы',
-            'status' => 'Статус (найден/потерян/none)',
-            'createdAt' => 'Дата создания',
-            'updatedAt' => 'Дата изменения',
+            'userId' => 'User ID',
+            'breedId' => 'Breed ID',
+            'species' => 'Species',
+            'name' => 'Name',
+            'gender' => 'Gender',
+            'photoId' => 'Photo ID',
+            'specialSigns' => 'Special Signs',
+            'status' => 'Status',
+            'createdAt' => 'Created At',
+            'updatedAt' => 'Updated At',
         ];
     }
 
@@ -87,5 +94,15 @@ class Pet extends BaseModel
     public function getPhoto()
     {
         return $this->hasOne(PetPhoto::className(), ['id' => 'photoId']);
+    }
+
+    /**
+     * Gets query for [[Breed]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBreed()
+    {
+        return $this->hasOne(Breed::className(), ['id' => 'breedId']);
     }
 }

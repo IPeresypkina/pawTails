@@ -67,6 +67,8 @@ $config = [
                 'POST api/<controller>/logout' => 'api/<controller>/logout',
                 'GET api/<controller>/<id:\d+>' => 'api/<controller>/view',
                 'PUT api/<controller>/<id:\d+>' => 'api/<controller>/update',
+
+                'GET api/<controller>/pet-identity' => 'api/<controller>/pet-identity',
             ],
         ],
     ],

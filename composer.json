@@ -12,7 +12,7 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.14",
@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "heroku/heroku-buildpack-php": "v12",
         "ext-gd": "*",
-        "fxp/composer-asset-plugin": "^1.4@dev"
+        "fxp/composer-asset-plugin": "^1.4@dev",
+        "silex/silex": "^2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -29,12 +30,14 @@
         "codeception/codeception": "4.0.x-dev | ^4.0",
         "codeception/verify": "~0.5.0 || ~1.1.0",
         "codeception/specify": "~0.4.6",
-        "symfony/browser-kit": ">=2.7 <=4.2.4",
+        "symfony/browser-kit": ">=2.7 <=4.4",
         "codeception/module-filesystem": "^1.0.0",
         "codeception/module-yii2": "^1.0.0",
         "codeception/module-asserts": "^1.0.0",
         "purrweb/yii2-heroku": "*",
-        "heroku/heroku-buildpack-php": "v12"
+        "heroku/heroku-buildpack-php": "v12",
+        "symfony/http-kernel": "^4.4",
+        "vova07/yii2-console-runner-extension": "*"
     },
     "config": {
         "process-timeout": 1800,

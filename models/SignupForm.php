@@ -45,7 +45,6 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        var_dump($this->firstName); die;
         $user = new User();
         $user->firstName = $this->firstName;
         $user->email = $this->email;
